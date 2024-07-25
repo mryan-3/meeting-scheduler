@@ -1,11 +1,23 @@
-import { DateTimePickerV2 } from "@/components/date-time-picker";
+import { MeetingDetailsCard } from '@/components/cards/meeting-details-card'
+import { DateTimePickerV2 } from '@/components/date-time-picker'
 
 export default function Home() {
   return (
-    <div className='b flex flex-col justify-center items-center w-full gap-4'>
-    hello world
-    <DateTimePickerV2 />
+    <div className='flex min-h-screen flex-col px-4 py-16 gap-4 antialiased md:mx-10 lg:mx-16'>
+      <h1 className='text-3xl font-bold text-center'>Meeting Scheduler</h1>
+      <p className='text-center'>Very cool meeting scheduler</p>
+      <div className='grid grid-cols-1 md:grid-cols-3 w-full justify-center gap-4'>
+        <div className='col-span-1'>
+          <DateTimePickerV2 />
+        </div>
+        <div className='col-span-1 md:col-span-2'>
+        <div className='flex flex-col gap-4'>
+          <MeetingDetailsCard />
+          <MeetingDetailsCard />
+          <MeetingDetailsCard />
+        </div>
+        </div>
+      </div>
     </div>
   )
 }
-

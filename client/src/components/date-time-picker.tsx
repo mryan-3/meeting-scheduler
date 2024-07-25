@@ -46,7 +46,7 @@ export function DateTimePickerV2() {
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-      console.log(data)
+      //console.log(data)
     toast.success(`Meeting at: ${format(data.datetime, 'PPP, p')}`)
   }
 
@@ -54,7 +54,7 @@ export function DateTimePickerV2() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-          <div className='flex justify-between w-full gap-6 border border-slate-400 p-4 '>
+          <div className='flex flex-col justify-between w-full gap-6  p-4 '>
             <FormField
               control={form.control}
               name='datetime'
@@ -103,7 +103,7 @@ export function DateTimePickerV2() {
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormDescription>Set your date and time.</FormDescription>
+                  <FormDescription className='text-[11px] font-semibold text-black'>Set your date and time.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -155,7 +155,7 @@ export function DateTimePickerV2() {
               )}
             />
           </div>
-          <Button type='submit'>Submit</Button>
+          <Button className='mx-4' type='submit'>Submit</Button>
         </form>
       </Form>
     </>
