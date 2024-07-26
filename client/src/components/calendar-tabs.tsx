@@ -1,7 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { DateTimePickerV2 } from './date-time-picker'
 import { Calendar } from '@/components/ui/calendar'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useMeetingStore } from '@/store/meetings-store'
 import { format } from 'date-fns/format'
@@ -28,9 +27,7 @@ export function CalendarTabs({ setMeetings }: CalendarTabsProps) {
 
   return (
     <Tabs
-      defaultValue={
-        window.location.pathname === '/meetings' ? 'view' : 'create'
-      }
+    defaultValue='create'
       className='flex flex-col h-full shadow:md'
     >
       <TabsList className='flex gap-2 bg-white'>
