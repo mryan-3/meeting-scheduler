@@ -13,9 +13,7 @@ export default function Home() {
         </div>
         <div className='col-span-1 md:col-span-2'>
           <div className='flex flex-col gap-4'>
-            <MeetingDetailsCard />
-            <MeetingDetailsCard />
-            <MeetingDetailsCard />
+            <MeetingDetailsCard date={new Date()} dayOfWeek='Monday' remainingTime={10} time='10:00' name='Meeting 1' description='Meeting 1 description is a long tome coming to he is a man' />
           </div>
         </div>
       </div>

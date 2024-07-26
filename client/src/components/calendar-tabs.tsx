@@ -6,7 +6,7 @@ export function CalendarTabs() {
   return (
     <Tabs defaultValue='create' className='border border-r-slate-300 flex flex-col h-full'>
       <TabsList className='flex gap-6'>
-        <TabsTrigger value='create'>Create Meeting</TabsTrigger>
+        <TabsTrigger value='create'>Schedule a Meeting</TabsTrigger>
         <TabsTrigger value='view'>View Meetings</TabsTrigger>
       </TabsList>
       <TabsContent value='create'>
