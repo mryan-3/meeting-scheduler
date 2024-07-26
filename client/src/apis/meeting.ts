@@ -40,6 +40,7 @@ interface IGetOneMeetingResponse {
   meeting: any
 }
 interface IGetAllMeetingsResponse {
+    id: string
   status: string
   meetings: any[]
 }

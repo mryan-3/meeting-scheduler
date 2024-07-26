@@ -34,12 +34,8 @@ export function CalendarTabs({ setMeetings }: CalendarTabsProps) {
       className='flex flex-col h-full shadow:md'
     >
       <TabsList className='flex gap-2 bg-white'>
-        <Link href='/' className='w-full'>
           <TabsTrigger value='create'>Schedule a Meeting</TabsTrigger>
-        </Link>
-        <Link href='/meetings' className='w-full'>
           <TabsTrigger value='view'>View Meetings</TabsTrigger>
-        </Link>
       </TabsList>
       <TabsContent value='create'>
         <DateTimePickerV2 />
