@@ -30,23 +30,24 @@ import {
 import { ScrollArea } from './ui/scroll-area'
 import { toast } from 'sonner'
 import { CalendarIcon } from 'lucide-react'
-
-const FormSchema = z.object({
-  datetime: z.date({
-    required_error: 'Date & time is required!.',
-  }),
-})
+import { MeetingFormSchema } from '@/lib/event'
+import { Input } from './ui/input'
+import { Textarea } from './ui/textarea'
 
 export function DateTimePickerV2() {
   const [isOpen, setIsOpen] = useState(false)
   const [time, setTime] = useState<string>('05:00')
   const [date, setDate] = useState<Date | null>(null)
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof MeetingFormSchema>>({
+    resolver: zodResolver(MeetingFormSchema),
+    defaultValues: {
+      name: '',
+      description: '',
+    },
   })
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-      //console.log(data)
+  async function onSubmit(data: z.infer<typeof MeetingFormSchema>) {
+    console.log(data)
     toast.success(`Meeting at: ${format(data.datetime, 'PPP, p')}`)
   }
 
@@ -55,6 +56,45 @@ export function DateTimePickerV2() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
           <div className='flex flex-col justify-between w-full gap-6  p-4 '>
+            <FormField
+              control={form.control}
+              name='name'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Meeting Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      autoComplete='off'
+                      autoCorrect='off'
+                      type='text'
+                      placeholder='Enter the name of the meeting'
+                      className='placeholder:text-primary'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name='description'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Meeting Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder='Description of the meeting'
+                      className='placeholder:text-primary'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name='datetime'
@@ -103,7 +143,9 @@ export function DateTimePickerV2() {
                       />
                     </PopoverContent>
                   </Popover>
-                  <FormDescription className='text-[11px] font-semibold text-black'>Set your date and time.</FormDescription>
+                  <FormDescription className='text-[11px] font-semibold text-black'>
+                    Set your date and time.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -155,7 +197,9 @@ export function DateTimePickerV2() {
               )}
             />
           </div>
-          <Button className='mx-4' type='submit'>Submit</Button>
+          <Button className='mx-4' type='submit'>
+            Submit
+          </Button>
         </form>
       </Form>
     </>

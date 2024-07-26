@@ -1,3 +1,4 @@
+import { CalendarTabs } from '@/components/calendar-tabs'
 import { MeetingDetailsCard } from '@/components/cards/meeting-details-card'
 import { DateTimePickerV2 } from '@/components/date-time-picker'
 
@@ -8,14 +9,14 @@ export default function Home() {
       <p className='text-center'>Very cool meeting scheduler</p>
       <div className='grid grid-cols-1 md:grid-cols-3 w-full justify-center gap-4'>
         <div className='col-span-1'>
-          <DateTimePickerV2 />
+          <CalendarTabs />
         </div>
         <div className='col-span-1 md:col-span-2'>
-        <div className='flex flex-col gap-4'>
-          <MeetingDetailsCard />
-          <MeetingDetailsCard />
-          <MeetingDetailsCard />
-        </div>
+          <div className='flex flex-col gap-4'>
+            <MeetingDetailsCard />
+            <MeetingDetailsCard />
+            <MeetingDetailsCard />
+          </div>
         </div>
       </div>
     </div>
