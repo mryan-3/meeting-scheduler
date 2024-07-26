@@ -33,7 +33,7 @@ import { CalendarIcon } from 'lucide-react'
 import { MeetingFormSchema } from '@/lib/event'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
-import { createMeeting } from '@/apis/meeting'
+import { useMeetingStore } from '@/store/meetings-store'
 
 export function DateTimePickerV2() {
   const [isOpen, setIsOpen] = useState(false)
@@ -47,6 +47,9 @@ export function DateTimePickerV2() {
     },
   })
 
+  const createMeeting = useMeetingStore((state) => state.createMeeting)
+
+
   async function onSubmit(data: z.infer<typeof MeetingFormSchema>) {
     const formatTime = data.meeting_time.toLocaleString('en-US', {
       hour: 'numeric',
@@ -55,13 +58,13 @@ export function DateTimePickerV2() {
     })
     const formatDate = data.meeting_date.toISOString().split('T')[0]
 
-    const response = await createMeeting({
+    await createMeeting({
       name: data.name,
       description: data.description,
       meeting_date: formatDate,
       meeting_time: formatTime,
     })
-    console.log(response)
+
     toast.success(`Meeting at: ${formatDate} ${formatTime}`)
   }
 

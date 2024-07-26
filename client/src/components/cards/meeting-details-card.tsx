@@ -12,9 +12,9 @@ import { format } from 'date-fns/format'
 
 interface MeetingDetailsCardProps {
   time: string
-  date: Date
+  date: string
   dayOfWeek: string
-  remainingTime: number
+  remainingTime: string
   name: string
   description: string
 }
@@ -43,7 +43,7 @@ export const MeetingDetailsCard = ({
             <p className='text-base font-semibold'>{time}</p>
           </div>
           <p className='text-xs font-medium text-muted-foreground'>
-            Starts in {remainingTime} minutes
+            Starts in {remainingTime}
           </p>
         </CardContent>
       </Card>

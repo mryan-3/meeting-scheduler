@@ -1,19 +1,57 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { DateTimePickerV2 } from './date-time-picker'
 import { Calendar } from '@/components/ui/calendar'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useMeetingStore } from '@/store/meetings-store'
+import { format } from 'date-fns/format'
 
-export function CalendarTabs() {
+interface CalendarTabsProps {
+  setMeetings?: (meetings: any[]) => void
+}
+
+export function CalendarTabs({ setMeetings }: CalendarTabsProps) {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date())
+  const { getMeetingsByDate } = useMeetingStore()
+
+  useEffect(() => {
+    if (selectedDate) {
+      const formattedDate = format(selectedDate, 'yyyy-MM-dd')
+      console.log(formattedDate)
+      getMeetingsByDate(formattedDate).then((data) => {
+        if (setMeetings) {
+          setMeetings(data)
+        }
+      })
+    }
+  }, [selectedDate, getMeetingsByDate, setMeetings])
+
   return (
-    <Tabs defaultValue='create' className='border border-r-slate-300 flex flex-col h-full'>
-      <TabsList className='flex gap-6'>
-        <TabsTrigger value='create'>Schedule a Meeting</TabsTrigger>
-        <TabsTrigger value='view'>View Meetings</TabsTrigger>
+    <Tabs
+      defaultValue={
+        window.location.pathname === '/meetings' ? 'view' : 'create'
+      }
+      className='flex flex-col h-full shadow:md'
+    >
+      <TabsList className='flex gap-2 bg-white'>
+        <Link href='/' className='w-full'>
+          <TabsTrigger value='create'>Schedule a Meeting</TabsTrigger>
+        </Link>
+        <Link href='/meetings' className='w-full'>
+          <TabsTrigger value='view'>View Meetings</TabsTrigger>
+        </Link>
       </TabsList>
       <TabsContent value='create'>
         <DateTimePickerV2 />
       </TabsContent>
-      <TabsContent value='view' className='w-full  flex items-center justify-center'>
-        <Calendar className='flex '/>
+      <TabsContent
+        value='view'
+        className='w-full  flex items-center justify-center'
+      >
+        <Calendar
+          onDayClick={(date: Date) => setSelectedDate(date)}
+          className='flex '
+        />
       </TabsContent>
     </Tabs>
   )

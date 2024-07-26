@@ -12,7 +12,7 @@ const meetingsApis = axios.create({
 interface ICreateMeetingRequest {
   name: string
   description: string
-  meeting_date:string
+  meeting_date: string
   meeting_time: string
 }
 
@@ -48,13 +48,14 @@ interface IUpdateMeetingRequest {
   id: string
   name?: string
   description?: string
-  meeting_date?: Date
+  meeting_date?: string
   meeting_time?: string
 }
 
 interface IUpdateMeetingResponse {
   status: string
   message: string
+  data: any
 }
 
 interface IDeleteMeetingRequest {
@@ -75,7 +76,9 @@ export const createMeeting = async (
     const response = await meetingsApis.post('/create', data)
     return response.data
   } catch (error: any) {
-      toast.error("The time slot is already taken. Please choose a different time.")
+    toast.error(
+      'The time slot is already taken. Please choose a different time.',
+    )
     throw error
   }
 }
