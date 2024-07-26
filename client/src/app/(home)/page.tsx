@@ -1,6 +1,5 @@
 import { CalendarTabs } from '@/components/calendar-tabs'
 import { MeetingDetailsCard } from '@/components/cards/meeting-details-card'
-import { DateTimePickerV2 } from '@/components/date-time-picker'
 
 export default function Home() {
   return (
@@ -13,7 +12,15 @@ export default function Home() {
         </div>
         <div className='col-span-1 md:col-span-2'>
           <div className='flex flex-col gap-4'>
-            <MeetingDetailsCard date={new Date()} dayOfWeek='Monday' remainingTime={10} time='10:00' name='Meeting 1' description='Meeting 1 description is a long tome coming to he is a man' />
+            <MeetingDetailsCard
+              date={new Date()}
+              dayOfWeek='Monday'
+              remainingTime={10}
+              time='10:00'
+              name='Meeting 1'
+              description='Meeting 1 description is a long tome coming to he is a man'
+            />
+
           </div>
         </div>
       </div>
