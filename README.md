@@ -1,9 +1,11 @@
 Meeting Scheduler Project
 =========================
 
+[Screencast from 2024-07-26 22-47-20.webm](https://github.com/user-attachments/assets/d82b0ec8-bf36-4998-b4e2-15e8f4a1e6bf)      
+
 Overview
 --------
-
+     
 The Meeting Scheduler project is a full-stack application designed to help users schedule and manage meetings. It consists of a client-side application built with Next.js, TypeScript, and pnpm, and a server-side application built with Node.js, Express, MySQL, and pnpm.
 
 Project Structure
@@ -160,6 +162,7 @@ Contributions are welcome! Please follow these steps:
 3.  Commit your changes (`git commit -am 'Add new feature'`).
 4.  Push to the branch (`git push origin feature/your-feature`).
 5.  Create a new Pull Request.
+
 
 License
 -------
