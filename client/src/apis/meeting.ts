@@ -1,5 +1,6 @@
 import showToast from '@/lib/us-toast'
 import axios from 'axios'
+import { toast } from 'sonner'
 
 const meetingsApis = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/meetings`,
@@ -11,7 +12,7 @@ const meetingsApis = axios.create({
 interface ICreateMeetingRequest {
   name: string
   description: string
-  meeting_date: Date
+  meeting_date:string
   meeting_time: string
 }
 
@@ -67,17 +68,14 @@ interface IDeleteMeetingResponse {
 
 // Create a new meeting
 // POST /api/v1/meetings/create
-export const createEvent = async (
+export const createMeeting = async (
   data: ICreateMeetingRequest,
 ): Promise<ICreateMeetingResponse> => {
   try {
     const response = await meetingsApis.post('/create', data)
     return response.data
   } catch (error: any) {
-    showToast({
-      message: error.response.data.message,
-      variant: 'error',
-    })
+      toast.error("The time slot is already taken. Please choose a different time.")
     throw error
   }
 }

@@ -33,6 +33,7 @@ import { CalendarIcon } from 'lucide-react'
 import { MeetingFormSchema } from '@/lib/event'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
+import { createMeeting } from '@/apis/meeting'
 
 export function DateTimePickerV2() {
   const [isOpen, setIsOpen] = useState(false)
@@ -47,8 +48,21 @@ export function DateTimePickerV2() {
   })
 
   async function onSubmit(data: z.infer<typeof MeetingFormSchema>) {
-    console.log(data)
-    toast.success(`Meeting at: ${format(data.datetime, 'PPP, p')}`)
+    const formatTime = data.meeting_time.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    })
+    const formatDate = data.meeting_date.toISOString().split('T')[0]
+
+    const response = await createMeeting({
+      name: data.name,
+      description: data.description,
+      meeting_date: formatDate,
+      meeting_time: formatTime,
+    })
+    console.log(response)
+    toast.success(`Meeting at: ${formatDate} ${formatTime}`)
   }
 
   return (
@@ -97,7 +111,7 @@ export function DateTimePickerV2() {
 
             <FormField
               control={form.control}
-              name='datetime'
+              name='meeting_date'
               render={({ field }) => (
                 <FormItem className='flex flex-col w-full'>
                   <FormLabel>Date</FormLabel>
@@ -152,7 +166,7 @@ export function DateTimePickerV2() {
             />
             <FormField
               control={form.control}
-              name='datetime'
+              name='meeting_time'
               render={({ field }) => (
                 <FormItem className='flex flex-col'>
                   <FormLabel>Time</FormLabel>
